@@ -1,0 +1,3914 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="CvBot — Where job matches happen effortlessly. AI-powered job matching, CV parsing, and application tracking."
+    />
+    <title>CvBot Pro — Where Job Matches Happen Effortlessly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <style>
+      /* ============================================================
+   DESIGN SYSTEM
+   ============================================================ */
+      :root {
+        --brand-primary: #4f46e5;
+        --brand-primary-hover: #4338ca;
+        --brand-primary-light: #eef2ff;
+        --brand-secondary: #06b6d4;
+        --brand-gradient: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+        --brand-gradient-soft: linear-gradient(
+          135deg,
+          #eef2ff 0%,
+          #ecfeff 100%
+        );
+
+        --bg: #f9fafb;
+        --bg-card: #ffffff;
+        --bg-elevated: #ffffff;
+        --bg-muted: #f3f4f6;
+        --bg-hover: #f9fafb;
+
+        --text-primary: #111827;
+        --text-secondary: #4b5563;
+        --text-muted: #9ca3af;
+        --text-inverse: #ffffff;
+
+        --border: #e5e7eb;
+        --border-strong: #d1d5db;
+
+        --success: #10b981;
+        --success-bg: #ecfdf5;
+        --warning: #f59e0b;
+        --warning-bg: #fffbeb;
+        --danger: #ef4444;
+        --danger-bg: #fef2f2;
+        --info: #3b82f6;
+        --info-bg: #eff6ff;
+
+        --radius-sm: 6px;
+        --radius: 10px;
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+        --radius-full: 9999px;
+
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        --shadow-md:
+          0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --shadow-lg:
+          0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        --shadow-xl:
+          0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+        --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+        --header-height: 72px;
+        --container-max: 1280px;
+      }
+
+      [data-theme="dark"] {
+        --bg: #0f172a;
+        --bg-card: #1e293b;
+        --bg-elevated: #1e293b;
+        --bg-muted: #334155;
+        --bg-hover: #334155;
+
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #64748b;
+        --text-inverse: #0f172a;
+
+        --border: #334155;
+        --border-strong: #475569;
+
+        --brand-primary-light: #1e1b4b;
+        --brand-gradient-soft: linear-gradient(
+          135deg,
+          #1e1b4b 0%,
+          #164e63 100%
+        );
+
+        --success-bg: #064e3b;
+        --warning-bg: #78350f;
+        --danger-bg: #7f1d1d;
+        --info-bg: #1e3a8a;
+      }
+
+      /* ============================================================
+   RESET & BASE
+   ============================================================ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--bg);
+        color: var(--text-primary);
+        line-height: 1.5;
+        min-height: 100vh;
+        transition:
+          background-color var(--transition),
+          color var(--transition);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font-family: inherit;
+        font-size: inherit;
+      }
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      ul,
+      ol {
+        list-style: none;
+      }
+
+      ::selection {
+        background: var(--brand-primary);
+        color: white;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--brand-primary);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-muted);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border-strong);
+        border-radius: 5px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--text-muted);
+      }
+
+      /* ============================================================
+   UTILITIES
+   ============================================================ */
+      .hidden {
+        display: none !important;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .container {
+        width: 100%;
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* ============================================================
+   BUTTONS
+   ============================================================ */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border: 1px solid transparent;
+        border-radius: var(--radius);
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all var(--transition);
+        white-space: nowrap;
+        user-select: none;
+      }
+
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .btn-primary {
+        background: var(--brand-primary);
+        color: white;
+        box-shadow: var(--shadow-sm);
+      }
+      .btn-primary:hover:not(:disabled) {
+        background: var(--brand-primary-hover);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+      }
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--text-primary);
+        border-color: var(--border-strong);
+      }
+      .btn-outline:hover:not(:disabled) {
+        background: var(--bg-hover);
+        border-color: var(--text-muted);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--text-secondary);
+      }
+      .btn-ghost:hover {
+        background: var(--bg-muted);
+        color: var(--text-primary);
+      }
+
+      .btn-success {
+        background: var(--success);
+        color: white;
+      }
+      .btn-danger {
+        background: var(--danger);
+        color: white;
+      }
+
+      .btn-block {
+        width: 100%;
+      }
+      .btn-lg {
+        padding: 14px 28px;
+        font-size: 16px;
+        border-radius: var(--radius-lg);
+      }
+      .btn-sm {
+        padding: 6px 14px;
+        font-size: 13px;
+      }
+
+      .btn-icon {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border-radius: var(--radius);
+        background: transparent;
+        color: var(--text-secondary);
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition);
+      }
+      .btn-icon:hover {
+        background: var(--bg-muted);
+        color: var(--text-primary);
+      }
+
+      /* ============================================================
+   FORMS
+   ============================================================ */
+      .form-group {
+        margin-bottom: 18px;
+      }
+      .form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 6px;
+      }
+      .form-hint {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+      .form-error {
+        font-size: 12px;
+        color: var(--danger);
+        margin-top: 4px;
+        display: none;
+      }
+      .form-error.visible {
+        display: block;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 11px 14px;
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius);
+        background: var(--bg-card);
+        color: var(--text-primary);
+        font-size: 14px;
+        transition: all var(--transition);
+      }
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--brand-primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+      }
+      .form-input.invalid {
+        border-color: var(--danger);
+      }
+      .form-textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .input-group {
+        position: relative;
+      }
+      .input-group .form-input {
+        padding-left: 42px;
+      }
+      .input-group .input-icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        pointer-events: none;
+      }
+      .input-group .toggle-password {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 4px;
+      }
+
+      /* Password strength */
+      .password-strength {
+        display: flex;
+        gap: 4px;
+        margin-top: 6px;
+      }
+      .password-strength .bar {
+        flex: 1;
+        height: 4px;
+        background: var(--bg-muted);
+        border-radius: var(--radius-full);
+        transition: background var(--transition);
+      }
+      .password-strength .bar.active.weak {
+        background: var(--danger);
+      }
+      .password-strength .bar.active.medium {
+        background: var(--warning);
+      }
+      .password-strength .bar.active.strong {
+        background: var(--success);
+      }
+      .password-strength-text {
+        font-size: 12px;
+        margin-top: 4px;
+        color: var(--text-muted);
+      }
+
+      /* ============================================================
+   HEADER / NAV
+   ============================================================ */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: var(--header-height);
+        gap: 20px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 20px;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: opacity var(--transition);
+        background: none;
+        border: none;
+        font-family: inherit;
+      }
+      .logo:hover {
+        opacity: 0.8;
+      }
+      .logo-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius);
+        background: var(--brand-gradient);
+        display: grid;
+        place-items: center;
+        color: white;
+        font-size: 18px;
+        box-shadow: var(--shadow-md);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex: 1;
+        justify-content: center;
+      }
+
+      .nav-link {
+        padding: 8px 14px;
+        border-radius: var(--radius);
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--text-secondary);
+        transition: all var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .nav-link:hover {
+        background: var(--bg-muted);
+        color: var(--text-primary);
+      }
+      .nav-link.active {
+        background: var(--brand-primary-light);
+        color: var(--brand-primary);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .theme-toggle {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius);
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        transition: all var(--transition);
+      }
+      .theme-toggle:hover {
+        background: var(--bg-muted);
+        color: var(--text-primary);
+      }
+
+      .user-menu {
+        position: relative;
+      }
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-full);
+        background: var(--brand-gradient);
+        color: white;
+        font-weight: 700;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all var(--transition);
+        font-size: 15px;
+      }
+      .user-avatar:hover {
+        border-color: var(--brand-primary);
+        transform: scale(1.05);
+      }
+
+      .user-dropdown {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 10px);
+        min-width: 240px;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xl);
+        padding: 8px;
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition: all var(--transition);
+        z-index: 200;
+      }
+      .user-dropdown.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .dropdown-header {
+        padding: 12px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 6px;
+      }
+      .dropdown-name {
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .dropdown-email {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: var(--radius);
+        font-size: 14px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all var(--transition);
+        width: 100%;
+        background: none;
+        border: none;
+        font-family: inherit;
+        text-align: left;
+      }
+      .dropdown-item:hover {
+        background: var(--bg-muted);
+        color: var(--text-primary);
+      }
+      .dropdown-item.danger {
+        color: var(--danger);
+      }
+      .dropdown-item.danger:hover {
+        background: var(--danger-bg);
+      }
+
+      .dropdown-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 6px 0;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius);
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        cursor: pointer;
+        place-items: center;
+      }
+
+      /* ============================================================
+   AUTH PAGES
+   ============================================================ */
+      .auth-layout {
+        min-height: calc(100vh - var(--header-height));
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+      }
+
+      .auth-visual {
+        background: var(--brand-gradient);
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .auth-visual::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(
+            circle at 20% 30%,
+            rgba(255, 255, 255, 0.15) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(255, 255, 255, 0.1) 0%,
+            transparent 40%
+          );
+        pointer-events: none;
+      }
+
+      .auth-visual-content {
+        position: relative;
+        z-index: 1;
+        max-width: 440px;
+      }
+      .auth-visual h1 {
+        font-size: 42px;
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 20px;
+        letter-spacing: -0.02em;
+      }
+      .auth-visual p {
+        font-size: 17px;
+        opacity: 0.9;
+        margin-bottom: 40px;
+        line-height: 1.6;
+      }
+      .auth-features {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .auth-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .auth-feature-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.2);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        font-size: 16px;
+      }
+      .auth-feature-text h4 {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+      .auth-feature-text p {
+        font-size: 13px;
+        opacity: 0.85;
+        margin: 0;
+      }
+
+      .auth-form-side {
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: var(--bg);
+        overflow-y: auto;
+      }
+
+      .auth-card {
+        width: 100%;
+        max-width: 440px;
+        background: var(--bg-card);
+        padding: 40px;
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border);
+      }
+
+      .auth-card h2 {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: -0.02em;
+      }
+      .auth-card .subtitle {
+        color: var(--text-muted);
+        font-size: 14px;
+        margin-bottom: 28px;
+      }
+
+      .auth-footer {
+        text-align: center;
+        margin-top: 24px;
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+      .auth-footer a {
+        color: var(--brand-primary);
+        font-weight: 600;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-family: inherit;
+        font-size: inherit;
+        padding: 0;
+        margin-left: 4px;
+      }
+      .auth-footer a:hover {
+        text-decoration: underline;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--text-muted);
+        font-size: 12px;
+        margin: 20px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5em;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .social-login {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .social-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius);
+        font-weight: 500;
+        font-size: 13px;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all var(--transition);
+      }
+      .social-btn:hover {
+        background: var(--bg-muted);
+      }
+
+      /* OTP */
+      .otp-inputs {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin: 24px 0;
+      }
+      .otp-input {
+        width: 56px;
+        height: 64px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        border: 2px solid var(--border-strong);
+        border-radius: var(--radius);
+        background: var(--bg-card);
+        color: var(--text-primary);
+        transition: all var(--transition);
+      }
+      .otp-input:focus {
+        outline: none;
+        border-color: var(--brand-primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+      }
+      .otp-input.filled {
+        border-color: var(--brand-primary);
+        background: var(--brand-primary-light);
+      }
+
+      .otp-resend {
+        text-align: center;
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 16px;
+      }
+      .otp-resend button {
+        background: none;
+        border: none;
+        color: var(--brand-primary);
+        font-weight: 600;
+        cursor: pointer;
+        font-size: inherit;
+        font-family: inherit;
+      }
+      .otp-resend button:disabled {
+        color: var(--text-muted);
+        cursor: not-allowed;
+      }
+
+      /* ============================================================
+   DASHBOARD / JOB BOARD
+   ============================================================ */
+      .dashboard {
+        padding: 32px 0 60px;
+      }
+
+      .page-header {
+        margin-bottom: 28px;
+      }
+      .page-title {
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 6px;
+      }
+      .page-subtitle {
+        color: var(--text-muted);
+        font-size: 15px;
+      }
+
+      /* Hero search */
+      .search-hero {
+        background: var(--brand-gradient);
+        border-radius: var(--radius-xl);
+        padding: 48px 40px;
+        margin-bottom: 32px;
+        position: relative;
+        overflow: hidden;
+        color: white;
+      }
+      .search-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 80% 20%,
+          rgba(255, 255, 255, 0.15) 0%,
+          transparent 50%
+        );
+        pointer-events: none;
+      }
+      .search-hero-content {
+        position: relative;
+        z-index: 1;
+      }
+      .search-hero h1 {
+        font-size: 32px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -0.02em;
+      }
+      .search-hero p {
+        opacity: 0.9;
+        margin-bottom: 24px;
+        font-size: 15px;
+      }
+
+      .search-bar {
+        display: flex;
+        gap: 8px;
+        background: var(--bg-card);
+        border-radius: var(--radius-lg);
+        padding: 8px;
+        box-shadow: var(--shadow-lg);
+        flex-wrap: wrap;
+      }
+      .search-field {
+        flex: 1;
+        min-width: 180px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: var(--radius);
+        background: transparent;
+        transition: background var(--transition);
+      }
+      .search-field:hover {
+        background: var(--bg-muted);
+      }
+      .search-field i {
+        color: var(--text-muted);
+        font-size: 14px;
+      }
+      .search-field input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: 6px 0;
+        color: var(--text-primary);
+        font-size: 14px;
+        outline: none;
+      }
+      .search-field input::placeholder {
+        color: var(--text-muted);
+      }
+      .search-bar .btn-primary {
+        padding: 12px 28px;
+        border-radius: var(--radius);
+      }
+
+      .search-divider {
+        width: 1px;
+        background: var(--border);
+        margin: 4px 0;
+      }
+
+      /* Stats */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      .stat-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all var(--transition);
+      }
+      .stat-card:hover {
+        border-color: var(--brand-primary);
+        box-shadow: var(--shadow-md);
+      }
+      .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius);
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+      .stat-icon.blue {
+        background: var(--info-bg);
+        color: var(--info);
+      }
+      .stat-icon.green {
+        background: var(--success-bg);
+        color: var(--success);
+      }
+      .stat-icon.amber {
+        background: var(--warning-bg);
+        color: var(--warning);
+      }
+      .stat-icon.purple {
+        background: var(--brand-primary-light);
+        color: var(--brand-primary);
+      }
+      .stat-value {
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .stat-label {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      /* Layout */
+      .jobs-layout {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      /* Filters sidebar */
+      .filters {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        position: sticky;
+        top: calc(var(--header-height) + 20px);
+      }
+      .filters-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .filters-header h3 {
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .filters-clear {
+        background: none;
+        border: none;
+        color: var(--brand-primary);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .filters-clear:hover {
+        text-decoration: underline;
+      }
+
+      .filter-group {
+        margin-bottom: 22px;
+      }
+      .filter-group:last-child {
+        margin-bottom: 0;
+      }
+      .filter-group h4 {
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+        margin-bottom: 12px;
+      }
+      .filter-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--text-secondary);
+        transition: color var(--transition);
+      }
+      .filter-option:hover {
+        color: var(--text-primary);
+      }
+      .filter-option input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--brand-primary);
+        cursor: pointer;
+      }
+      .filter-count {
+        margin-left: auto;
+        font-size: 12px;
+        color: var(--text-muted);
+        background: var(--bg-muted);
+        padding: 2px 8px;
+        border-radius: var(--radius-full);
+      }
+
+      /* Results area */
+      .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .results-count {
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+      .results-count strong {
+        color: var(--text-primary);
+      }
+
+      .sort-select {
+        padding: 8px 32px 8px 12px;
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius);
+        background: var(--bg-card);
+        color: var(--text-primary);
+        font-size: 14px;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+      }
+
+      /* Job cards */
+      .jobs-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .job-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        transition: all var(--transition);
+        cursor: pointer;
+        position: relative;
+      }
+      .job-card:hover {
+        border-color: var(--brand-primary);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+      }
+
+      .job-card-top {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 14px;
+      }
+      .job-logo {
+        width: 52px;
+        height: 52px;
+        border-radius: var(--radius);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 20px;
+        color: white;
+        flex-shrink: 0;
+      }
+      .job-main {
+        flex: 1;
+        min-width: 0;
+      }
+      .job-title {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 4px;
+        color: var(--text-primary);
+        transition: color var(--transition);
+      }
+      .job-card:hover .job-title {
+        color: var(--brand-primary);
+      }
+      .job-company {
+        font-size: 14px;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .job-company i {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+      .job-dot {
+        color: var(--text-muted);
+      }
+
+      .job-salary {
+        font-weight: 700;
+        color: var(--success);
+        font-size: 15px;
+        white-space: nowrap;
+      }
+
+      .job-description {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin-bottom: 14px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .job-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 10px;
+        border-radius: var(--radius-full);
+        font-size: 12px;
+        font-weight: 500;
+        background: var(--bg-muted);
+        color: var(--text-secondary);
+      }
+      .tag.tag-primary {
+        background: var(--brand-primary-light);
+        color: var(--brand-primary);
+      }
+      .tag.tag-success {
+        background: var(--success-bg);
+        color: var(--success);
+      }
+      .tag.tag-warning {
+        background: var(--warning-bg);
+        color: var(--warning);
+      }
+
+      .job-card-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 14px;
+        border-top: 1px solid var(--border);
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .job-meta {
+        display: flex;
+        gap: 16px;
+        font-size: 13px;
+        color: var(--text-muted);
+        flex-wrap: wrap;
+      }
+      .job-meta span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .job-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .bookmark-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text-muted);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        transition: all var(--transition);
+      }
+      .bookmark-btn:hover {
+        border-color: var(--brand-primary);
+        color: var(--brand-primary);
+      }
+      .bookmark-btn.saved {
+        background: var(--brand-primary-light);
+        color: var(--brand-primary);
+        border-color: var(--brand-primary);
+      }
+
+      /* Empty state */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+      }
+      .empty-state-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        border-radius: var(--radius-full);
+        background: var(--bg-muted);
+        display: grid;
+        place-items: center;
+        font-size: 32px;
+        color: var(--text-muted);
+      }
+      .empty-state h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .empty-state p {
+        color: var(--text-muted);
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      /* ============================================================
+   PROFILE
+   ============================================================ */
+      .profile-grid {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      .profile-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        text-align: center;
+        position: sticky;
+        top: calc(var(--header-height) + 20px);
+      }
+
+      .profile-avatar-lg {
+        width: 96px;
+        height: 96px;
+        border-radius: var(--radius-full);
+        background: var(--brand-gradient);
+        color: white;
+        font-size: 36px;
+        font-weight: 700;
+        display: grid;
+        place-items: center;
+        margin: 0 auto 16px;
+        box-shadow: var(--shadow-md);
+      }
+      .profile-name {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .profile-role {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+      }
+
+      .profile-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        padding: 16px 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 20px;
+      }
+      .profile-stat-value {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--brand-primary);
+      }
+      .profile-stat-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .profile-info {
+        text-align: left;
+      }
+      .profile-info-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+      .profile-info-item i {
+        color: var(--text-muted);
+        width: 18px;
+      }
+
+      /* CV upload */
+      .cv-uploader {
+        border: 2px dashed var(--border-strong);
+        border-radius: var(--radius-lg);
+        padding: 40px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all var(--transition);
+        background: var(--bg-hover);
+      }
+      .cv-uploader:hover,
+      .cv-uploader.dragover {
+        border-color: var(--brand-primary);
+        background: var(--brand-primary-light);
+      }
+      .cv-uploader-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 16px;
+        border-radius: var(--radius-full);
+        background: var(--brand-gradient);
+        color: white;
+        display: grid;
+        place-items: center;
+        font-size: 24px;
+      }
+      .cv-uploader h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .cv-uploader p {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 16px;
+      }
+      .cv-uploader input[type="file"] {
+        display: none;
+      }
+
+      .cv-file-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+        background: var(--success-bg);
+        border: 1px solid var(--success);
+        border-radius: var(--radius);
+        margin-top: 16px;
+        text-align: left;
+      }
+      .cv-file-info i {
+        color: var(--success);
+        font-size: 20px;
+      }
+      .cv-file-info .file-name {
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .cv-file-info .file-size {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .skill-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: var(--brand-primary-light);
+        color: var(--brand-primary);
+        border-radius: var(--radius-full);
+        font-size: 13px;
+        font-weight: 500;
+        animation: chipPop 0.3s ease;
+      }
+      .skill-chip .remove {
+        cursor: pointer;
+        opacity: 0.6;
+        font-size: 10px;
+      }
+      .skill-chip .remove:hover {
+        opacity: 1;
+      }
+
+      @keyframes chipPop {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* ============================================================
+   APPLICATIONS
+   ============================================================ */
+      .applications-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .application-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: all var(--transition);
+      }
+      .application-card:hover {
+        border-color: var(--brand-primary);
+        box-shadow: var(--shadow-md);
+      }
+
+      .application-status {
+        padding: 4px 12px;
+        border-radius: var(--radius-full);
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .status-applied {
+        background: var(--info-bg);
+        color: var(--info);
+      }
+      .status-reviewing {
+        background: var(--warning-bg);
+        color: var(--warning);
+      }
+      .status-interview {
+        background: var(--brand-primary-light);
+        color: var(--brand-primary);
+      }
+      .status-offer {
+        background: var(--success-bg);
+        color: var(--success);
+      }
+      .status-rejected {
+        background: var(--danger-bg);
+        color: var(--danger);
+      }
+
+      /* ============================================================
+   MODAL
+   ============================================================ */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--transition);
+      }
+      .modal-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal {
+        background: var(--bg-card);
+        border-radius: var(--radius-xl);
+        width: 100%;
+        max-width: 640px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: var(--shadow-xl);
+        transform: scale(0.95) translateY(20px);
+        transition: transform var(--transition);
+      }
+      .modal-overlay.open .modal {
+        transform: scale(1) translateY(0);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 24px 24px 16px;
+        border-bottom: 1px solid var(--border);
+        gap: 16px;
+      }
+      .modal-title {
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .modal-subtitle {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+      .modal-close {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius);
+        border: none;
+        background: var(--bg-muted);
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        transition: all var(--transition);
+      }
+      .modal-close:hover {
+        background: var(--danger-bg);
+        color: var(--danger);
+      }
+
+      .modal-body {
+        padding: 24px;
+      }
+      .modal-footer {
+        padding: 16px 24px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        background: var(--bg-hover);
+        border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+      }
+
+      .job-detail-header {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .detail-section {
+        margin-bottom: 24px;
+      }
+      .detail-section:last-child {
+        margin-bottom: 0;
+      }
+      .detail-section h3 {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .detail-section h3 i {
+        color: var(--brand-primary);
+      }
+      .detail-section p,
+      .detail-section li {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+      }
+      .detail-section ul {
+        padding-left: 20px;
+        list-style: disc;
+      }
+      .detail-section ul li {
+        margin-bottom: 6px;
+      }
+
+      /* ============================================================
+   TOAST
+   ============================================================ */
+      .toast-container {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 2000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 380px;
+        pointer-events: none;
+      }
+
+      .toast {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 18px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--brand-primary);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-lg);
+        font-size: 14px;
+        color: var(--text-primary);
+        pointer-events: auto;
+        animation: toastIn 0.3s ease;
+        min-width: 280px;
+      }
+      .toast.success {
+        border-left-color: var(--success);
+      }
+      .toast.error {
+        border-left-color: var(--danger);
+      }
+      .toast.warning {
+        border-left-color: var(--warning);
+      }
+      .toast i {
+        font-size: 18px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .toast.success i {
+        color: var(--success);
+      }
+      .toast.error i {
+        color: var(--danger);
+      }
+      .toast.warning i {
+        color: var(--warning);
+      }
+      .toast.removing {
+        animation: toastOut 0.3s ease forwards;
+      }
+
+      @keyframes toastIn {
+        from {
+          transform: translateX(120%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes toastOut {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(120%);
+          opacity: 0;
+        }
+      }
+
+      /* ============================================================
+   LOADER
+   ============================================================ */
+      .loader {
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .skeleton {
+        background: linear-gradient(
+          90deg,
+          var(--bg-muted) 25%,
+          var(--border) 50%,
+          var(--bg-muted) 75%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: var(--radius);
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      /* ============================================================
+   RESPONSIVE
+   ============================================================ */
+      @media (max-width: 1024px) {
+        .auth-layout {
+          grid-template-columns: 1fr;
+        }
+        .auth-visual {
+          display: none;
+        }
+        .jobs-layout {
+          grid-template-columns: 1fr;
+        }
+        .filters {
+          position: static;
+        }
+        .profile-grid {
+          grid-template-columns: 1fr;
+        }
+        .profile-card {
+          position: static;
+        }
+      }
+
+      @media (max-width: 768px) {
+        :root {
+          --header-height: 64px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .mobile-menu-btn {
+          display: grid;
+        }
+        .auth-form-side {
+          padding: 24px 16px;
+        }
+        .auth-card {
+          padding: 28px 24px;
+        }
+        .auth-card h2 {
+          font-size: 22px;
+        }
+        .search-hero {
+          padding: 32px 24px;
+        }
+        .search-hero h1 {
+          font-size: 24px;
+        }
+        .search-bar {
+          flex-direction: column;
+        }
+        .search-divider {
+          display: none;
+        }
+        .search-bar .btn-primary {
+          width: 100%;
+        }
+        .page-title {
+          font-size: 22px;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .job-card-top {
+          flex-wrap: wrap;
+        }
+        .job-salary {
+          width: 100%;
+          margin-top: 8px;
+        }
+        .job-card-bottom {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .job-actions {
+          width: 100%;
+        }
+        .job-actions .btn {
+          flex: 1;
+        }
+        .modal {
+          max-height: 95vh;
+        }
+        .modal-header,
+        .modal-body,
+        .modal-footer {
+          padding: 16px 20px;
+        }
+        .otp-input {
+          width: 48px;
+          height: 56px;
+          font-size: 20px;
+        }
+        .toast-container {
+          left: 16px;
+          right: 16px;
+          bottom: 16px;
+          max-width: none;
+        }
+        .application-card {
+          flex-wrap: wrap;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+        .otp-inputs {
+          gap: 8px;
+        }
+        .otp-input {
+          width: 44px;
+          height: 52px;
+          font-size: 18px;
+        }
+        .profile-stats {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .social-login {
+          flex-direction: column;
+        }
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============================================================
+     TOAST CONTAINER
+     ============================================================ -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ============================================================
+     HEADER
+     ============================================================ -->
+    <header class="header" id="appHeader" style="display: none">
+      <div class="container header-inner">
+        <button
+          class="logo"
+          onclick="router.go('dashboard')"
+          aria-label="CvBot Home"
+        >
+          <span class="logo-mark"><i class="fa-solid fa-robot"></i></span>
+          <span>CvBot</span>
+        </button>
+
+        <nav class="nav-links" id="navLinks">
+          <button
+            class="nav-link"
+            data-route="dashboard"
+            onclick="router.go('dashboard')"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i> Find Jobs
+          </button>
+          <button
+            class="nav-link"
+            data-route="applications"
+            onclick="router.go('applications')"
+          >
+            <i class="fa-solid fa-briefcase"></i> Applications
+          </button>
+          <button
+            class="nav-link"
+            data-route="saved"
+            onclick="router.go('saved')"
+          >
+            <i class="fa-regular fa-bookmark"></i> Saved
+          </button>
+          <button
+            class="nav-link"
+            data-route="profile"
+            onclick="router.go('profile')"
+          >
+            <i class="fa-regular fa-user"></i> Profile
+          </button>
+        </nav>
+
+        <div class="header-actions">
+          <button
+            class="theme-toggle"
+            onclick="theme.toggle()"
+            aria-label="Toggle dark mode"
+          >
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+          </button>
+          <div class="user-menu">
+            <button
+              class="user-avatar"
+              id="userAvatar"
+              onclick="toggleUserMenu(event)"
+              aria-label="User menu"
+            >
+              U
+            </button>
+            <div class="user-dropdown" id="userDropdown">
+              <div class="dropdown-header">
+                <div class="dropdown-name" id="dropdownName">User</div>
+                <div class="dropdown-email" id="dropdownEmail">
+                  user@example.com
+                </div>
+              </div>
+              <button class="dropdown-item" onclick="router.go('profile')">
+                <i class="fa-regular fa-user"></i> My Profile
+              </button>
+              <button class="dropdown-item" onclick="router.go('applications')">
+                <i class="fa-solid fa-briefcase"></i> Applications
+              </button>
+              <button class="dropdown-item" onclick="router.go('saved')">
+                <i class="fa-regular fa-bookmark"></i> Saved Jobs
+              </button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item danger" onclick="auth.logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+              </button>
+            </div>
+          </div>
+          <button
+            class="mobile-menu-btn"
+            onclick="toggleMobileMenu()"
+            aria-label="Menu"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================================================
+     MOBILE NAV OVERLAY
+     ============================================================ -->
+    <div
+      id="mobileNav"
+      style="
+        display: none;
+        position: fixed;
+        inset: var(--header-height) 0 0 0;
+        background: var(--bg-card);
+        z-index: 99;
+        padding: 20px;
+        overflow-y: auto;
+      "
+    >
+      <nav style="display: flex; flex-direction: column; gap: 4px">
+        <button
+          class="nav-link"
+          style="justify-content: flex-start"
+          onclick="
+            router.go('dashboard');
+            toggleMobileMenu();
+          "
+        >
+          <i class="fa-solid fa-magnifying-glass"></i> Find Jobs
+        </button>
+        <button
+          class="nav-link"
+          style="justify-content: flex-start"
+          onclick="
+            router.go('applications');
+            toggleMobileMenu();
+          "
+        >
+          <i class="fa-solid fa-briefcase"></i> Applications
+        </button>
+        <button
+          class="nav-link"
+          style="justify-content: flex-start"
+          onclick="
+            router.go('saved');
+            toggleMobileMenu();
+          "
+        >
+          <i class="fa-regular fa-bookmark"></i> Saved
+        </button>
+        <button
+          class="nav-link"
+          style="justify-content: flex-start"
+          onclick="
+            router.go('profile');
+            toggleMobileMenu();
+          "
+        >
+          <i class="fa-regular fa-user"></i> Profile
+        </button>
+        <button
+          class="nav-link"
+          style="justify-content: flex-start; color: var(--danger)"
+          onclick="
+            auth.logout();
+            toggleMobileMenu();
+          "
+        >
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
+      </nav>
+    </div>
+
+    <!-- ============================================================
+     MAIN APP
+     ============================================================ -->
+    <main id="app"></main>
+
+    <!-- ============================================================
+     JOB DETAIL MODAL
+     ============================================================ -->
+    <div class="modal-overlay" id="jobModal">
+      <div class="modal">
+        <div class="modal-header">
+          <div>
+            <div class="modal-title" id="modalJobTitle">Job Title</div>
+            <div class="modal-subtitle" id="modalJobCompany">Company</div>
+          </div>
+          <button
+            class="modal-close"
+            onclick="modal.close('jobModal')"
+            aria-label="Close"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body" id="modalJobBody"></div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="modal.close('jobModal')">
+            Cancel
+          </button>
+          <button class="btn btn-primary" id="modalApplyBtn">Apply Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+     APPLY MODAL
+     ============================================================ -->
+    <div class="modal-overlay" id="applyModal">
+      <div class="modal" style="max-width: 560px">
+        <div class="modal-header">
+          <div>
+            <div class="modal-title">Apply for this position</div>
+            <div class="modal-subtitle" id="applyJobTitle"></div>
+          </div>
+          <button
+            class="modal-close"
+            onclick="modal.close('applyModal')"
+            aria-label="Close"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input
+              type="text"
+              class="form-input"
+              id="applyName"
+              placeholder="Your full name"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input
+              type="email"
+              class="form-input"
+              id="applyEmail"
+              placeholder="you@example.com"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cover Letter (optional)</label>
+            <textarea
+              class="form-textarea"
+              id="applyCover"
+              placeholder="Tell us why you're a great fit..."
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Resume</label>
+            <div
+              class="cv-uploader"
+              style="padding: 24px"
+              onclick="document.getElementById('applyResume').click()"
+            >
+              <input type="file" id="applyResume" accept=".pdf,.doc,.docx" />
+              <div style="font-size: 14px; color: var(--text-secondary)">
+                <i
+                  class="fa-solid fa-cloud-arrow-up"
+                  style="
+                    font-size: 24px;
+                    margin-bottom: 8px;
+                    display: block;
+                    color: var(--brand-primary);
+                  "
+                ></i>
+                <span id="applyResumeName">Click to upload your resume</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="modal.close('applyModal')">
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="submitApplication()">
+            Submit Application
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ============================================================
+   STATE & DATA
+   ============================================================ */
+      const STORAGE_KEYS = {
+        USER: "cvbot_user",
+        THEME: "cvbot_theme",
+        SAVED: "cvbot_saved",
+        APPLICATIONS: "cvbot_apps",
+        PROFILE: "cvbot_profile",
+      };
+
+      const COMPANIES = [
+        { name: "Google SA", color: "#4285F4", initial: "G" },
+        { name: "Amazon AWS", color: "#FF9900", initial: "A" },
+        { name: "Microsoft", color: "#00A4EF", initial: "M" },
+        { name: "Discovery", color: "#0057B8", initial: "D" },
+        { name: "Vodacom", color: "#E60000", initial: "V" },
+        { name: "Standard Bank", color: "#0033A0", initial: "S" },
+        { name: "Nando's", color: "#8B1A1A", initial: "N" },
+        { name: "Takealot", color: "#FF6B00", initial: "T" },
+        { name: "MTN", color: "#FFCB05", initial: "M" },
+        { name: "Capitec", color: "#003A70", initial: "C" },
+        { name: "Shoprite", color: "#E30613", initial: "S" },
+        { name: "Naspers", color: "#1E90FF", initial: "N" },
+        { name: "Deloitte", color: "#86BC25", initial: "D" },
+        { name: "PwC", color: "#D93025", initial: "P" },
+      ];
+
+      const JOB_TITLES = [
+        "Senior Software Engineer",
+        "Junior Data Analyst",
+        "UX/UI Designer",
+        "Marketing Intern",
+        "DevOps Engineer",
+        "Financial Accountant",
+        "Product Manager",
+        "Backend Developer",
+        "Frontend Developer",
+        "Data Scientist",
+        "Cloud Architect",
+        "QA Engineer",
+        "Business Analyst",
+        "Cybersecurity Specialist",
+        "Mobile Developer",
+        "HR Coordinator",
+        "Sales Representative",
+        "Graphic Designer",
+        "Content Writer",
+        "Project Manager",
+        "Network Administrator",
+        "Full Stack Developer",
+        "Machine Learning Engineer",
+        "Systems Analyst",
+      ];
+
+      const LOCATIONS = [
+        "Johannesburg",
+        "Cape Town",
+        "Durban",
+        "Pretoria",
+        "Sandton",
+        "Midrand",
+        "Remote",
+        "Port Elizabeth",
+        "Bloemfontein",
+        "Centurion",
+      ];
+      const TYPES = [
+        "Full-Time",
+        "Part-Time",
+        "Remote",
+        "Contract",
+        "Internship",
+      ];
+      const LEVELS = ["Entry", "Mid", "Senior"];
+      const TAGS = [
+        "JavaScript",
+        "Python",
+        "React",
+        "Node.js",
+        "SQL",
+        "AWS",
+        "Docker",
+        "Figma",
+        "Agile",
+        "Java",
+        "C#",
+        "Vue",
+        "Angular",
+        "Kubernetes",
+        "Communication",
+        "Leadership",
+        "Analytics",
+        "Excel",
+        "SAP",
+        "Salesforce",
+      ];
+
+      function seedJobs() {
+        const jobs = [];
+        let seed = 42;
+        const rand = () => {
+          seed = (seed * 9301 + 49297) % 233280;
+          return seed / 233280;
+        };
+
+        for (let i = 0; i < 24; i++) {
+          const company = COMPANIES[Math.floor(rand() * COMPANIES.length)];
+          const title = JOB_TITLES[Math.floor(rand() * JOB_TITLES.length)];
+          const location = LOCATIONS[Math.floor(rand() * LOCATIONS.length)];
+          const type = TYPES[Math.floor(rand() * TYPES.length)];
+          const level = LEVELS[Math.floor(rand() * LEVELS.length)];
+          const baseSalary =
+            level === "Senior" ? 70000 : level === "Mid" ? 40000 : 15000;
+          const salary =
+            Math.round((baseSalary + rand() * baseSalary) / 1000) * 1000;
+
+          const numTags = 2 + Math.floor(rand() * 3);
+          const jobTags = [];
+          for (let j = 0; j < numTags; j++) {
+            const tag = TAGS[Math.floor(rand() * TAGS.length)];
+            if (!jobTags.includes(tag)) jobTags.push(tag);
+          }
+
+          jobs.push({
+            id: i + 1,
+            title,
+            company: company.name,
+            companyColor: company.color,
+            companyInitial: company.initial,
+            location,
+            type,
+            level,
+            salary: `R${salary.toLocaleString()} - R${(salary + 15000).toLocaleString()}`,
+            tags: jobTags,
+            posted: `${1 + Math.floor(rand() * 14)}d ago`,
+            applicants: 5 + Math.floor(rand() * 60),
+            description: `We are looking for a talented ${title} to join our team at ${company.name}. You will work on exciting projects that impact millions of users. This role offers excellent growth opportunities and a collaborative environment.`,
+            requirements: [
+              `Minimum ${level === "Entry" ? "1" : level === "Mid" ? "3" : "5"}+ years of relevant experience`,
+              `Strong knowledge of ${jobTags.join(" and ")}`,
+              "Excellent communication and teamwork skills",
+              "Ability to work in a fast-paced environment",
+              "Relevant degree or certifications preferred",
+            ],
+            benefits: [
+              "Competitive salary and performance bonuses",
+              "Medical aid and provident fund",
+              "Flexible working hours and remote options",
+              "Continuous learning and development",
+              "Career growth opportunities",
+            ],
+          });
+        }
+        return jobs;
+      }
+
+      const JOBS = seedJobs();
+
+      /* ============================================================
+   THEME
+   ============================================================ */
+      const theme = {
+        init() {
+          const saved = localStorage.getItem(STORAGE_KEYS.THEME) || "light";
+          this.set(saved);
+        },
+        set(mode) {
+          document.documentElement.setAttribute("data-theme", mode);
+          localStorage.setItem(STORAGE_KEYS.THEME, mode);
+          const icon = document.getElementById("themeIcon");
+          if (icon) {
+            icon.className =
+              mode === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
+          }
+        },
+        toggle() {
+          const current = document.documentElement.getAttribute("data-theme");
+          this.set(current === "dark" ? "light" : "dark");
+        },
+      };
+
+      /* ============================================================
+   TOAST
+   ============================================================ */
+      const toast = {
+        show(message, type = "success", duration = 3500) {
+          const container = document.getElementById("toastContainer");
+          const icons = {
+            success: "fa-circle-check",
+            error: "fa-circle-exclamation",
+            warning: "fa-triangle-exclamation",
+            info: "fa-circle-info",
+          };
+          const el = document.createElement("div");
+          el.className = `toast ${type}`;
+          el.innerHTML = `
+      <i class="fa-solid ${icons[type] || icons.info}"></i>
+      <div>${message}</div>
+    `;
+          container.appendChild(el);
+          setTimeout(() => {
+            el.classList.add("removing");
+            setTimeout(() => el.remove(), 300);
+          }, duration);
+        },
+      };
+
+      /* ============================================================
+   AUTH
+   ============================================================ */
+      const auth = {
+        user: null,
+
+        init() {
+          const saved = localStorage.getItem(STORAGE_KEYS.USER);
+          if (saved) {
+            try {
+              this.user = JSON.parse(saved);
+            } catch (e) {}
+          }
+        },
+
+        login(user) {
+          this.user = user;
+          localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
+        },
+
+        logout() {
+          this.user = null;
+          localStorage.removeItem(STORAGE_KEYS.USER);
+          this.closeUserMenu();
+          toast.show("You have been signed out.", "info");
+          router.go("login");
+        },
+
+        closeUserMenu() {
+          document.getElementById("userDropdown")?.classList.remove("open");
+        },
+
+        updateUI() {
+          if (!this.user) return;
+          const initials = (this.user.name || "User")
+            .split(" ")
+            .map((n) => n[0])
+            .join("")
+            .slice(0, 2)
+            .toUpperCase();
+          document.getElementById("userAvatar").textContent = initials;
+          document.getElementById("dropdownName").textContent =
+            this.user.name || "User";
+          document.getElementById("dropdownEmail").textContent =
+            this.user.email || "user@example.com";
+        },
+      };
+
+      /* ============================================================
+   VALIDATION
+   ============================================================ */
+      const validate = {
+        email(v) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        },
+        phone(v) {
+          return /^\d{10}$/.test(v);
+        },
+        saId(v) {
+          if (!/^\d{13}$/.test(v)) return false;
+          const digits = v.split("").map(Number);
+          const check = digits.pop();
+          const sum = digits.reduce(
+            (acc, d, i) => acc + (i % 2 === 0 ? d : d < 5 ? d * 2 : d * 2 - 9),
+            0,
+          );
+          return (10 - (sum % 10)) % 10 === check;
+        },
+        passwordStrength(p) {
+          let score = 0;
+          const checks = {
+            length: p.length >= 8,
+            upper: /[A-Z]/.test(p),
+            lower: /[a-z]/.test(p),
+            digit: /\d/.test(p),
+            special: /[!@#$%^&*(),.?":{}|<>]/.test(p),
+          };
+          Object.values(checks).forEach((v) => {
+            if (v) score++;
+          });
+          return { score, checks };
+        },
+      };
+
+      /* ============================================================
+   DATA (Saved / Applications / Profile)
+   ============================================================ */
+      const data = {
+        getSaved() {
+          try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEYS.SAVED)) || [];
+          } catch (e) {
+            return [];
+          }
+        },
+        setSaved(v) {
+          localStorage.setItem(STORAGE_KEYS.SAVED, JSON.stringify(v));
+        },
+        toggleSaved(id) {
+          const saved = this.getSaved();
+          const idx = saved.indexOf(id);
+          if (idx > -1) {
+            saved.splice(idx, 1);
+            toast.show("Removed from saved jobs", "info");
+          } else {
+            saved.push(id);
+            toast.show("Saved to your list", "success");
+          }
+          this.setSaved(saved);
+          return saved;
+        },
+        getApps() {
+          try {
+            return (
+              JSON.parse(localStorage.getItem(STORAGE_KEYS.APPLICATIONS)) || []
+            );
+          } catch (e) {
+            return [];
+          }
+        },
+        addApp(app) {
+          const apps = this.getApps();
+          if (apps.some((a) => a.jobId === app.jobId)) {
+            toast.show("You already applied to this job", "warning");
+            return false;
+          }
+          apps.push({ ...app, status: "Applied", appliedAt: Date.now() });
+          localStorage.setItem(STORAGE_KEYS.APPLICATIONS, JSON.stringify(apps));
+          return true;
+        },
+        getProfile() {
+          try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEYS.PROFILE)) || {};
+          } catch (e) {
+            return {};
+          }
+        },
+        setProfile(v) {
+          localStorage.setItem(STORAGE_KEYS.PROFILE, JSON.stringify(v));
+        },
+      };
+
+      /* ============================================================
+   MODAL
+   ============================================================ */
+      const modal = {
+        open(id) {
+          document.getElementById(id)?.classList.add("open");
+        },
+        close(id) {
+          document.getElementById(id)?.classList.remove("open");
+        },
+        closeAll() {
+          document
+            .querySelectorAll(".modal-overlay")
+            .forEach((m) => m.classList.remove("open"));
+        },
+      };
+
+      /* ============================================================
+   ROUTER
+   ============================================================ */
+      const router = {
+        routes: {},
+
+        go(route, params = {}) {
+          if (!this.routes[route]) {
+            route = "login";
+          }
+          if (!auth.user && !["login", "signup", "forgot"].includes(route)) {
+            route = "login";
+          }
+          if (auth.user && ["login", "signup", "forgot"].includes(route)) {
+            route = "dashboard";
+          }
+
+          const app = document.getElementById("app");
+          app.innerHTML = this.routes[route](params);
+
+          // Hide header on auth pages
+          const isAuth = ["login", "signup", "forgot"].includes(route);
+          document.getElementById("appHeader").style.display = isAuth
+            ? "none"
+            : "";
+
+          // Update nav active state
+          if (!isAuth) {
+            document
+              .querySelectorAll(".nav-link[data-route]")
+              .forEach((link) => {
+                link.classList.toggle("active", link.dataset.route === route);
+              });
+            auth.updateUI();
+          }
+
+          // Scroll to top
+          window.scrollTo(0, 0);
+
+          // Post-render hooks
+          if (route === "dashboard") jobsUI.attach();
+          if (route === "profile") profileUI.attach();
+        },
+      };
+
+      /* ============================================================
+   PAGE: LOGIN
+   ============================================================ */
+      router.routes.login = () => `
+  <div class="auth-layout">
+    <div class="auth-visual">
+      <div class="auth-visual-content">
+        <h1>Find your dream job with CvBot.</h1>
+        <p>AI-powered job matching, CV parsing, and application tracking — all in one place.</p>
+        <div class="auth-features">
+          <div class="auth-feature">
+            <div class="auth-feature-icon"><i class="fa-solid fa-bolt"></i></div>
+            <div class="auth-feature-text">
+              <h4>Instant job matching</h4>
+              <p>Get matched to roles that fit your skills and preferences.</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon"><i class="fa-solid fa-file-lines"></i></div>
+            <div class="auth-feature-text">
+              <h4>Smart CV parsing</h4>
+              <p>Upload once, apply everywhere. We extract your skills automatically.</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="auth-feature-text">
+              <h4>Track your progress</h4>
+              <p>Monitor every application from submission to offer.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="auth-form-side">
+      <div class="auth-card">
+        <h2>Welcome back</h2>
+        <p class="subtitle">Sign in to continue to CvBot</p>
+        
+        <div class="social-login">
+          <button class="social-btn" onclick="toast.show('Google login coming soon', 'info')"><i class="fa-brands fa-google"></i> Google</button>
+          <button class="social-btn" onclick="toast.show('LinkedIn login coming soon', 'info')"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</button>
+        </div>
+        <div class="divider">OR</div>
+        
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email or Username</label>
+            <div class="input-group">
+              <i class="fa-regular fa-envelope input-icon"></i>
+              <input type="text" class="form-input" id="loginEmail" placeholder="you@example.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password</label>
+            <div class="input-group">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" class="form-input" id="loginPassword" placeholder="Enter your password" required>
+              <button type="button" class="toggle-password" onclick="togglePassword('loginPassword', this)" aria-label="Show password">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+            <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-secondary);cursor:pointer;">
+              <input type="checkbox" style="accent-color:var(--brand-primary);"> Remember me
+            </label>
+            <button type="button" onclick="router.go('forgot')" style="background:none;border:none;color:var(--brand-primary);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Forgot password?</button>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
+        </form>
+        
+        <div class="auth-footer">
+          Don't have an account?
+          <a onclick="router.go('signup')">Create one</a>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+      /* ============================================================
+   PAGE: SIGNUP
+   ============================================================ */
+      router.routes.signup = () => `
+  <div class="auth-layout">
+    <div class="auth-visual">
+      <div class="auth-visual-content">
+        <h1>Start your journey today.</h1>
+        <p>Join thousands of South Africans finding better jobs faster with CvBot.</p>
+        <div class="auth-features">
+          <div class="auth-feature">
+            <div class="auth-feature-icon"><i class="fa-solid fa-rocket"></i></div>
+            <div class="auth-feature-text">
+              <h4>Free forever</h4>
+              <p>No hidden fees. Apply to unlimited jobs.</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="auth-feature-text">
+              <h4>Your data is safe</h4>
+              <p>Bank-level encryption. You control your data.</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <div class="auth-feature-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="auth-feature-text">
+              <h4>Trusted by thousands</h4>
+              <p>Over 50,000 job seekers use CvBot every month.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="auth-form-side">
+      <div class="auth-card">
+        <h2>Create your account</h2>
+        <p class="subtitle">It only takes a minute</p>
+        
+        <form onsubmit="handleSignup(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-input" id="signupName" placeholder="John" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Surname</label>
+              <input type="text" class="form-input" id="signupSurname" placeholder="Doe" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="input-group">
+              <i class="fa-regular fa-envelope input-icon"></i>
+              <input type="email" class="form-input" id="signupEmail" placeholder="you@example.com" required>
+            </div>
+            <div class="form-error" id="signupEmailError">Please enter a valid email</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <div class="input-group">
+              <i class="fa-solid fa-phone input-icon"></i>
+              <input type="tel" class="form-input" id="signupPhone" placeholder="0821234567" maxlength="10" required>
+            </div>
+            <div class="form-error" id="signupPhoneError">Please enter a valid 10-digit SA number</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ID Number</label>
+            <div class="input-group">
+              <i class="fa-regular fa-id-card input-icon"></i>
+              <input type="text" class="form-input" id="signupId" placeholder="13-digit SA ID" maxlength="13" required>
+            </div>
+            <div class="form-error" id="signupIdError">Please enter a valid SA ID number</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" class="form-input" id="signupPassword" placeholder="Create a strong password" required>
+              <button type="button" class="toggle-password" onclick="togglePassword('signupPassword', this)" aria-label="Show password">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <div class="password-strength" id="pwStrength">
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+            <div class="password-strength-text" id="pwStrengthText">Use 8+ characters with a mix of letters, numbers & symbols</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <div class="input-group">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input type="password" class="form-input" id="signupConfirm" placeholder="Confirm your password" required>
+            </div>
+            <div class="form-error" id="signupConfirmError">Passwords do not match</div>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text-secondary);margin-bottom:20px;cursor:pointer;">
+            <input type="checkbox" id="signupTerms" style="accent-color:var(--brand-primary);margin-top:3px;" required>
+            <span>I agree to the <a href="#" style="color:var(--brand-primary);">Terms of Service</a> and <a href="#" style="color:var(--brand-primary);">Privacy Policy</a></span>
+          </label>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Create Account</button>
+        </form>
+        
+        <div class="auth-footer">
+          Already have an account?
+          <a onclick="router.go('login')">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+      /* ============================================================
+   PAGE: FORGOT PASSWORD
+   ============================================================ */
+      router.routes.forgot = (params) => {
+        const step = params.step || 1;
+
+        if (step === 1) {
+          return `
+      <div class="auth-layout" style="grid-template-columns:1fr;">
+        <div class="auth-form-side">
+          <div class="auth-card">
+            <h2>Forgot password?</h2>
+            <p class="subtitle">Enter your registered email or ID number and we'll send you a verification code.</p>
+            <form onsubmit="handleForgot(event)">
+              <div class="form-group">
+                <label class="form-label">Email or ID Number</label>
+                <div class="input-group">
+                  <i class="fa-regular fa-envelope input-icon"></i>
+                  <input type="text" class="form-input" id="forgotInput" placeholder="you@example.com or 13-digit ID" required>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Send Verification Code</button>
+            </form>
+            <div class="auth-footer">
+              Remember your password? <a onclick="router.go('login')">Sign in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+        }
+
+        if (step === 2) {
+          return `
+      <div class="auth-layout" style="grid-template-columns:1fr;">
+        <div class="auth-form-side">
+          <div class="auth-card">
+            <h2>Check your email</h2>
+            <p class="subtitle">We sent a 4-digit code to <strong>${params.target || "your email"}</strong>. Enter it below to verify.</p>
+            <div class="otp-inputs" id="otpInputs">
+              <input type="text" class="otp-input" maxlength="1" inputmode="numeric" data-idx="0" aria-label="Digit 1">
+              <input type="text" class="otp-input" maxlength="1" inputmode="numeric" data-idx="1" aria-label="Digit 2">
+              <input type="text" class="otp-input" maxlength="1" inputmode="numeric" data-idx="2" aria-label="Digit 3">
+              <input type="text" class="otp-input" maxlength="1" inputmode="numeric" data-idx="3" aria-label="Digit 4">
+            </div>
+            <div class="form-error" id="otpError" style="text-align:center;">Invalid code. Please try again.</div>
+            <button class="btn btn-primary btn-lg btn-block" onclick="verifyOTP('${params.target || ""}')">Verify Code</button>
+            <div class="otp-resend">
+              Didn't receive it? <button type="button" id="resendBtn" onclick="resendOTP()">Resend</button>
+              <span id="resendTimer"></span>
+            </div>
+            <div class="auth-footer" style="margin-top:20px;">
+              <a onclick="router.go('forgot')">← Use a different email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+        }
+
+        return `
+    <div class="auth-layout" style="grid-template-columns:1fr;">
+      <div class="auth-form-side">
+        <div class="auth-card">
+          <h2>Set new password</h2>
+          <p class="subtitle">Your new password must be different from previous ones.</p>
+          <form onsubmit="handleResetPassword(event)">
+            <div class="form-group">
+              <label class="form-label">New Password</label>
+              <div class="input-group">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" class="form-input" id="newPassword" placeholder="Enter new password" required>
+                <button type="button" class="toggle-password" onclick="togglePassword('newPassword', this)"><i class="fa-regular fa-eye"></i></button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirm Password</label>
+              <div class="input-group">
+                <i class="fa-solid fa-lock input-icon"></i>
+                <input type="password" class="form-input" id="confirmNewPassword" placeholder="Confirm new password" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Reset Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+      };
+
+      /* ============================================================
+   PAGE: DASHBOARD
+   ============================================================ */
+      router.routes.dashboard = () => `
+  <div class="dashboard">
+    <div class="container">
+      <div class="search-hero">
+        <div class="search-hero-content">
+          <h1>Find your next opportunity</h1>
+          <p>${JOBS.length} jobs available across South Africa</p>
+          <div class="search-bar">
+            <div class="search-field">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="searchKeyword" placeholder="Job title, company, or keyword">
+            </div>
+            <div class="search-divider"></div>
+            <div class="search-field">
+              <i class="fa-solid fa-location-dot"></i>
+              <input type="text" id="searchLocation" placeholder="City or remote">
+            </div>
+            <button class="btn btn-primary" onclick="jobsUI.search()">
+              <i class="fa-solid fa-magnifying-glass"></i> Search
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue"><i class="fa-solid fa-briefcase"></i></div>
+          <div>
+            <div class="stat-value">${JOBS.length}</div>
+            <div class="stat-label">Open Positions</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green"><i class="fa-solid fa-building"></i></div>
+          <div>
+            <div class="stat-value">${new Set(JOBS.map((j) => j.company)).size}</div>
+            <div class="stat-label">Companies Hiring</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon amber"><i class="fa-solid fa-paper-plane"></i></div>
+          <div>
+            <div class="stat-value">${data.getApps().length}</div>
+            <div class="stat-label">Your Applications</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple"><i class="fa-regular fa-bookmark"></i></div>
+          <div>
+            <div class="stat-value">${data.getSaved().length}</div>
+            <div class="stat-label">Saved Jobs</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="jobs-layout">
+        <aside class="filters">
+          <div class="filters-header">
+            <h3>Filters</h3>
+            <button class="filters-clear" onclick="jobsUI.clearFilters()">Clear all</button>
+          </div>
+          <div class="filter-group">
+            <h4>Job Type</h4>
+            ${TYPES.map(
+              (t) => `
+              <label class="filter-option">
+                <input type="checkbox" class="filter-type" value="${t}">
+                <span>${t}</span>
+                <span class="filter-count">${JOBS.filter((j) => j.type === t).length}</span>
+              </label>
+            `,
+            ).join("")}
+          </div>
+          <div class="filter-group">
+            <h4>Experience Level</h4>
+            ${LEVELS.map(
+              (l) => `
+              <label class="filter-option">
+                <input type="checkbox" class="filter-level" value="${l}">
+                <span>${l}</span>
+                <span class="filter-count">${JOBS.filter((j) => j.level === l).length}</span>
+              </label>
+            `,
+            ).join("")}
+          </div>
+          <div class="filter-group">
+            <h4>Location</h4>
+            ${[...new Set(JOBS.map((j) => j.location))]
+              .slice(0, 8)
+              .map(
+                (loc) => `
+              <label class="filter-option">
+                <input type="checkbox" class="filter-location" value="${loc}">
+                <span>${loc}</span>
+                <span class="filter-count">${JOBS.filter((j) => j.location === loc).length}</span>
+              </label>
+            `,
+              )
+              .join("")}
+          </div>
+        </aside>
+
+        <div class="results">
+          <div class="results-header">
+            <div class="results-count" id="resultsCount">Showing <strong>${JOBS.length}</strong> jobs</div>
+            <select class="sort-select" id="sortSelect" onchange="jobsUI.search()">
+              <option value="recent">Most Recent</option>
+              <option value="salary-high">Salary: High to Low</option>
+              <option value="salary-low">Salary: Low to High</option>
+              <option value="applicants">Fewest Applicants</option>
+            </select>
+          </div>
+          <div class="jobs-list" id="jobsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+      /* ============================================================
+   PAGE: APPLICATIONS
+   ============================================================ */
+      router.routes.applications = () => {
+        const apps = data.getApps();
+        return `
+    <div class="dashboard">
+      <div class="container">
+        <div class="page-header">
+          <h1 class="page-title">My Applications</h1>
+          <p class="page-subtitle">Track the status of every job you've applied to</p>
+        </div>
+        ${
+          apps.length === 0
+            ? `
+          <div class="empty-state">
+            <div class="empty-state-icon"><i class="fa-solid fa-paper-plane"></i></div>
+            <h3>No applications yet</h3>
+            <p>Start applying to jobs and track your progress here.</p>
+            <button class="btn btn-primary" onclick="router.go('dashboard')">Browse Jobs</button>
+          </div>
+        `
+            : `
+          <div class="applications-list">
+            ${apps
+              .slice()
+              .reverse()
+              .map((app) => {
+                const job = JOBS.find((j) => j.id === app.jobId);
+                if (!job) return "";
+                const statusClass =
+                  {
+                    Applied: "status-applied",
+                    Reviewing: "status-reviewing",
+                    Interview: "status-interview",
+                    Offer: "status-offer",
+                    Rejected: "status-rejected",
+                  }[app.status] || "status-applied";
+                return `
+                <div class="application-card">
+                  <div class="job-logo" style="background:${job.companyColor};">${job.companyInitial}</div>
+                  <div style="flex:1;min-width:0;">
+                    <div class="job-title" style="font-size:15px;">${job.title}</div>
+                    <div class="job-company">${job.company} · ${job.location}</div>
+                    <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">
+                      Applied ${new Date(app.appliedAt).toLocaleDateString()}
+                    </div>
+                  </div>
+                  <span class="application-status ${statusClass}">${app.status}</span>
+                </div>
+              `;
+              })
+              .join("")}
+          </div>
+        `
+        }
+      </div>
+    </div>
+  `;
+      };
+
+      /* ============================================================
+   PAGE: SAVED
+   ============================================================ */
+      router.routes.saved = () => {
+        const saved = data.getSaved();
+        const savedJobs = JOBS.filter((j) => saved.includes(j.id));
+        return `
+    <div class="dashboard">
+      <div class="container">
+        <div class="page-header">
+          <h1 class="page-title">Saved Jobs</h1>
+          <p class="page-subtitle">${savedJobs.length} job${savedJobs.length !== 1 ? "s" : ""} saved for later</p>
+        </div>
+        ${
+          savedJobs.length === 0
+            ? `
+          <div class="empty-state">
+            <div class="empty-state-icon"><i class="fa-regular fa-bookmark"></i></div>
+            <h3>No saved jobs yet</h3>
+            <p>Tap the bookmark icon on any job to save it for later.</p>
+            <button class="btn btn-primary" onclick="router.go('dashboard')">Browse Jobs</button>
+          </div>
+        `
+            : `
+          <div class="jobs-list">
+            ${savedJobs.map((j) => jobsUI.renderCard(j)).join("")}
+          </div>
+        `
+        }
+      </div>
+    </div>
+  `;
+      };
+
+      /* ============================================================
+   PAGE: PROFILE
+   ============================================================ */
+      router.routes.profile = () => {
+        const profile = data.getProfile();
+        const skills = profile.skills || [];
+        const name = profile.name || auth.user?.name || "User";
+        const email = profile.email || auth.user?.email || "user@example.com";
+        const phone = profile.phone || "";
+        const initials = name
+          .split(" ")
+          .map((n) => n[0])
+          .join("")
+          .slice(0, 2)
+          .toUpperCase();
+
+        return `
+    <div class="dashboard">
+      <div class="container">
+        <div class="page-header">
+          <h1 class="page-title">My Profile</h1>
+          <p class="page-subtitle">Manage your personal information and CV</p>
+        </div>
+        <div class="profile-grid">
+          <div class="profile-card">
+            <div class="profile-avatar-lg">${initials}</div>
+            <h2 class="profile-name">${name}</h2>
+            <p class="profile-role">${profile.role || "Job Seeker"}</p>
+            <div class="profile-stats">
+              <div>
+                <div class="profile-stat-value">${data.getApps().length}</div>
+                <div class="profile-stat-label">Applied</div>
+              </div>
+              <div>
+                <div class="profile-stat-value">${data.getSaved().length}</div>
+                <div class="profile-stat-label">Saved</div>
+              </div>
+              <div>
+                <div class="profile-stat-value">${skills.length}</div>
+                <div class="profile-stat-label">Skills</div>
+              </div>
+            </div>
+            <div class="profile-info">
+              <div class="profile-info-item"><i class="fa-regular fa-envelope"></i> ${email}</div>
+              ${phone ? `<div class="profile-info-item"><i class="fa-solid fa-phone"></i> ${phone}</div>` : ""}
+              <div class="profile-info-item"><i class="fa-regular fa-calendar"></i> Joined ${new Date().toLocaleDateString("en-ZA", { year: "numeric", month: "long" })}</div>
+            </div>
+            <button class="btn btn-outline btn-block" style="margin-top:20px;" onclick="profileUI.editProfile()">
+              <i class="fa-solid fa-pen"></i> Edit Profile
+            </button>
+          </div>
+          
+          <div style="display:flex;flex-direction:column;gap:24px;">
+            <div class="profile-card" style="text-align:left;position:static;">
+              <h3 style="font-size:17px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+                <i class="fa-solid fa-file-lines" style="color:var(--brand-primary);"></i> CV / Resume
+              </h3>
+              <div class="cv-uploader" id="cvUploader" onclick="document.getElementById('cvFile').click()">
+                <input type="file" id="cvFile" accept=".pdf" onchange="profileUI.handleCVUpload(event)">
+                <div class="cv-uploader-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <h3>Upload your CV</h3>
+                <p>Drag & drop or click to browse. PDF files only, max 10MB.</p>
+                <span class="btn btn-primary btn-sm">Choose File</span>
+              </div>
+              <div id="cvFileInfo"></div>
+            </div>
+            
+            <div class="profile-card" style="text-align:left;position:static;">
+              <h3 style="font-size:17px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+                <i class="fa-solid fa-lightbulb" style="color:var(--brand-primary);"></i> Skills
+              </h3>
+              <div class="skills-grid" id="skillsGrid">
+                ${
+                  skills.length === 0
+                    ? '<p style="font-size:14px;color:var(--text-muted);">Upload your CV to auto-extract skills, or add them manually.</p>'
+                    : skills
+                        .map(
+                          (s) => `
+                  <span class="skill-chip">${s} <span class="remove" onclick="profileUI.removeSkill('${s}')">✕</span></span>
+                `,
+                        )
+                        .join("")
+                }
+              </div>
+              <div style="display:flex;gap:8px;margin-top:16px;">
+                <input type="text" class="form-input" id="newSkill" placeholder="Add a skill..." style="flex:1;">
+                <button class="btn btn-primary" onclick="profileUI.addSkill()">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+      };
+
+      /* ============================================================
+   JOBS UI CONTROLLER
+   ============================================================ */
+      const jobsUI = {
+        filtered: JOBS,
+        savedIds: data.getSaved(),
+
+        search() {
+          const keyword = (
+            document.getElementById("searchKeyword")?.value || ""
+          )
+            .toLowerCase()
+            .trim();
+          const location = (
+            document.getElementById("searchLocation")?.value || ""
+          )
+            .toLowerCase()
+            .trim();
+          const types = [
+            ...document.querySelectorAll(".filter-type:checked"),
+          ].map((i) => i.value);
+          const levels = [
+            ...document.querySelectorAll(".filter-level:checked"),
+          ].map((i) => i.value);
+          const locations = [
+            ...document.querySelectorAll(".filter-location:checked"),
+          ].map((i) => i.value);
+          const sort = document.getElementById("sortSelect")?.value || "recent";
+
+          let results = JOBS.filter((job) => {
+            const matchesKeyword =
+              !keyword ||
+              job.title.toLowerCase().includes(keyword) ||
+              job.company.toLowerCase().includes(keyword) ||
+              job.tags.some((t) => t.toLowerCase().includes(keyword));
+            const matchesLocation =
+              !location || job.location.toLowerCase().includes(location);
+            const matchesType = types.length === 0 || types.includes(job.type);
+            const matchesLevel =
+              levels.length === 0 || levels.includes(job.level);
+            const matchesLocFilter =
+              locations.length === 0 || locations.includes(job.location);
+            return (
+              matchesKeyword &&
+              matchesLocation &&
+              matchesType &&
+              matchesLevel &&
+              matchesLocFilter
+            );
+          });
+
+          if (sort === "salary-high") {
+            results.sort(
+              (a, b) =>
+                parseInt(b.salary.replace(/\D/g, "")) -
+                parseInt(a.salary.replace(/\D/g, "")),
+            );
+          } else if (sort === "salary-low") {
+            results.sort(
+              (a, b) =>
+                parseInt(a.salary.replace(/\D/g, "")) -
+                parseInt(b.salary.replace(/\D/g, "")),
+            );
+          } else if (sort === "applicants") {
+            results.sort((a, b) => a.applicants - b.applicants);
+          }
+
+          this.filtered = results;
+          this.render();
+        },
+
+        render() {
+          const list = document.getElementById("jobsList");
+          const count = document.getElementById("resultsCount");
+          if (!list) return;
+
+          count.innerHTML = `Showing <strong>${this.filtered.length}</strong> job${this.filtered.length !== 1 ? "s" : ""}`;
+
+          if (this.filtered.length === 0) {
+            list.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>No jobs match your criteria</h3>
+          <p>Try adjusting your filters or search keywords.</p>
+          <button class="btn btn-primary" onclick="jobsUI.clearFilters()">Clear Filters</button>
+        </div>
+      `;
+            return;
+          }
+
+          list.innerHTML = this.filtered
+            .map((j) => this.renderCard(j))
+            .join("");
+        },
+
+        renderCard(job) {
+          const isSaved = this.savedIds.includes(job.id);
+          return `
+      <div class="job-card" onclick="jobsUI.openJob(${job.id})">
+        <div class="job-card-top">
+          <div class="job-logo" style="background:${job.companyColor};">${job.companyInitial}</div>
+          <div class="job-main">
+            <h3 class="job-title">${job.title}</h3>
+            <div class="job-company">
+              <i class="fa-solid fa-building"></i> ${job.company}
+              <span class="job-dot">•</span>
+              <i class="fa-solid fa-location-dot"></i> ${job.location}
+              <span class="job-dot">•</span>
+              <i class="fa-regular fa-clock"></i> ${job.posted}
+            </div>
+          </div>
+          <div class="job-salary">${job.salary}</div>
+        </div>
+        <p class="job-description">${job.description}</p>
+        <div class="job-tags">
+          <span class="tag tag-primary">${job.type}</span>
+          <span class="tag tag-warning">${job.level}</span>
+          ${job.tags.map((t) => `<span class="tag">${t}</span>`).join("")}
+        </div>
+        <div class="job-card-bottom">
+          <div class="job-meta">
+            <span><i class="fa-solid fa-users"></i> ${job.applicants} applicants</span>
+            <span><i class="fa-solid fa-circle-check"></i> Actively hiring</span>
+          </div>
+          <div class="job-actions">
+            <button class="bookmark-btn ${isSaved ? "saved" : ""}" onclick="event.stopPropagation();jobsUI.toggleSave(${job.id}, this)" aria-label="Save job">
+              <i class="fa-${isSaved ? "solid" : "regular"} fa-bookmark"></i>
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();jobsUI.openJob(${job.id})">View Details</button>
+          </div>
+        </div>
+      </div>
+    `;
+        },
+
+        attach() {
+          this.render();
+        },
+
+        clearFilters() {
+          document
+            .querySelectorAll(".filter-type, .filter-level, .filter-location")
+            .forEach((i) => (i.checked = false));
+          document.getElementById("searchKeyword").value = "";
+          document.getElementById("searchLocation").value = "";
+          this.search();
+        },
+
+        toggleSave(id, btn) {
+          const saved = data.toggleSaved(id);
+          this.savedIds = saved;
+          if (btn) {
+            const isSaved = saved.includes(id);
+            btn.classList.toggle("saved", isSaved);
+            btn.innerHTML = `<i class="fa-${isSaved ? "solid" : "regular"} fa-bookmark"></i>`;
+          }
+        },
+
+        openJob(id) {
+          const job = JOBS.find((j) => j.id === id);
+          if (!job) return;
+
+          document.getElementById("modalJobTitle").textContent = job.title;
+          document.getElementById("modalJobCompany").innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+        <div class="job-logo" style="width:32px;height:32px;font-size:13px;background:${job.companyColor};">${job.companyInitial}</div>
+        <span>${job.company} · ${job.location} · ${job.type}</span>
+      </div>
+    `;
+
+          document.getElementById("modalJobBody").innerHTML = `
+      <div class="job-tags" style="margin-bottom:20px;">
+        <span class="tag tag-primary">${job.type}</span>
+        <span class="tag tag-warning">${job.level} Level</span>
+        ${job.tags.map((t) => `<span class="tag">${t}</span>`).join("")}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;padding:16px;background:var(--bg-muted);border-radius:var(--radius);">
+        <div>
+          <div style="font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;margin-bottom:4px;">Salary</div>
+          <div style="font-size:14px;font-weight:700;color:var(--success);">${job.salary}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;margin-bottom:4px;">Applicants</div>
+          <div style="font-size:14px;font-weight:700;">${job.applicants}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:600;margin-bottom:4px;">Posted</div>
+          <div style="font-size:14px;font-weight:700;">${job.posted}</div>
+        </div>
+      </div>
+      <div class="detail-section">
+        <h3><i class="fa-solid fa-align-left"></i> About the Role</h3>
+        <p>${job.description}</p>
+      </div>
+      <div class="detail-section">
+        <h3><i class="fa-solid fa-list-check"></i> Requirements</h3>
+        <ul>${job.requirements.map((r) => `<li>${r}</li>`).join("")}</ul>
+      </div>
+      <div class="detail-section">
+        <h3><i class="fa-solid fa-gift"></i> Benefits</h3>
+        <ul>${job.benefits.map((b) => `<li>${b}</li>`).join("")}</ul>
+      </div>
+    `;
+
+          document.getElementById("modalApplyBtn").onclick = () => {
+            modal.close("jobModal");
+            this.openApply(job);
+          };
+
+          modal.open("jobModal");
+        },
+
+        openApply(job) {
+          const profile = data.getProfile();
+          document.getElementById("applyJobTitle").textContent =
+            `${job.title} at ${job.company}`;
+          document.getElementById("applyName").value =
+            profile.name || auth.user?.name || "";
+          document.getElementById("applyEmail").value =
+            profile.email || auth.user?.email || "";
+          document.getElementById("applyCover").value = "";
+          document.getElementById("applyResumeName").textContent =
+            "Click to upload your resume";
+
+          document.getElementById("applyModal").dataset.jobId = job.id;
+          modal.open("applyModal");
+        },
+      };
+
+      /* ============================================================
+   PROFILE UI CONTROLLER
+   ============================================================ */
+      const profileUI = {
+        attach() {},
+
+        handleCVUpload(e) {
+          const file = e.target.files[0];
+          if (!file) return;
+          if (file.type !== "application/pdf") {
+            toast.show("Please upload a PDF file", "error");
+            return;
+          }
+          if (file.size > 10 * 1024 * 1024) {
+            toast.show("File must be under 10MB", "error");
+            return;
+          }
+
+          document.getElementById("cvFileInfo").innerHTML = `
+      <div class="cv-file-info">
+        <i class="fa-solid fa-file-pdf"></i>
+        <div style="flex:1;">
+          <div class="file-name">${file.name}</div>
+          <div class="file-size">${(file.size / 1024).toFixed(1)} KB</div>
+        </div>
+        <i class="fa-solid fa-circle-check" style="color:var(--success);"></i>
+      </div>
+    `;
+
+          // Parse PDF
+          const reader = new FileReader();
+          reader.onload = async () => {
+            try {
+              const pdf = await pdfjsLib.getDocument(reader.result).promise;
+              let text = "";
+              for (let i = 1; i <= Math.min(pdf.numPages, 5); i++) {
+                const page = await pdf.getPage(i);
+                const content = await page.getTextContent();
+                text += content.items.map((item) => item.str).join(" ") + "\n";
+              }
+
+              // Extract skills (simple keyword matching)
+              const SKILL_KEYWORDS = [
+                "JavaScript",
+                "Python",
+                "React",
+                "Node.js",
+                "SQL",
+                "AWS",
+                "Docker",
+                "Figma",
+                "Agile",
+                "Java",
+                "C#",
+                "Vue",
+                "Angular",
+                "Kubernetes",
+                "Communication",
+                "Leadership",
+                "Analytics",
+                "Excel",
+                "SAP",
+                "Salesforce",
+                "HTML",
+                "CSS",
+                "TypeScript",
+                "Git",
+                "MongoDB",
+                "PostgreSQL",
+                "REST",
+                "GraphQL",
+                "Linux",
+                "Windows",
+                "Azure",
+                "GCP",
+                "Machine Learning",
+                "Data Science",
+                "Marketing",
+                "Sales",
+                "Design",
+                "Photoshop",
+                "Illustrator",
+              ];
+              const lower = text.toLowerCase();
+              const found = SKILL_KEYWORDS.filter((k) =>
+                lower.includes(k.toLowerCase()),
+              );
+
+              const profile = data.getProfile();
+              profile.cvText = text.slice(0, 5000);
+              profile.cvFileName = file.name;
+              profile.skills = [
+                ...new Set([...(profile.skills || []), ...found]),
+              ];
+              data.setProfile(profile);
+
+              toast.show(`CV parsed! Found ${found.length} skills.`, "success");
+              router.go("profile");
+            } catch (err) {
+              console.error(err);
+              toast.show("Error parsing PDF. Please try again.", "error");
+            }
+          };
+          reader.readAsDataURL(file);
+        },
+
+        addSkill() {
+          const input = document.getElementById("newSkill");
+          const val = input.value.trim();
+          if (!val) return;
+          const profile = data.getProfile();
+          profile.skills = profile.skills || [];
+          if (profile.skills.includes(val)) {
+            toast.show("Skill already added", "warning");
+            return;
+          }
+          profile.skills.push(val);
+          data.setProfile(profile);
+          input.value = "";
+          router.go("profile");
+          toast.show("Skill added", "success");
+        },
+
+        removeSkill(skill) {
+          const profile = data.getProfile();
+          profile.skills = (profile.skills || []).filter((s) => s !== skill);
+          data.setProfile(profile);
+          router.go("profile");
+        },
+
+        editProfile() {
+          const name = prompt(
+            "Enter your full name:",
+            data.getProfile().name || auth.user?.name || "",
+          );
+          if (name) {
+            const profile = data.getProfile();
+            profile.name = name;
+            data.setProfile(profile);
+            if (auth.user) {
+              auth.user.name = name;
+              auth.login(auth.user);
+            }
+            router.go("profile");
+            toast.show("Profile updated", "success");
+          }
+        },
+      };
+
+      /* ============================================================
+   HANDLERS
+   ============================================================ */
+      function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        if (!email || !password) {
+          toast.show("Please fill in all fields", "error");
+          return;
+        }
+
+        const profile = data.getProfile();
+        auth.login({
+          name: profile.name || email.split("@")[0],
+          email,
+          id: "user-" + Date.now(),
+        });
+        toast.show(`Welcome back, ${auth.user.name}!`, "success");
+        router.go("dashboard");
+      }
+
+      function handleSignup(e) {
+        e.preventDefault();
+        const name = document.getElementById("signupName").value.trim();
+        const surname = document.getElementById("signupSurname").value.trim();
+        const email = document.getElementById("signupEmail").value.trim();
+        const phone = document.getElementById("signupPhone").value.trim();
+        const id = document.getElementById("signupId").value.trim();
+        const password = document.getElementById("signupPassword").value;
+        const confirm = document.getElementById("signupConfirm").value;
+
+        let valid = true;
+
+        // Email
+        if (!validate.email(email)) {
+          document.getElementById("signupEmailError").classList.add("visible");
+          document.getElementById("signupEmail").classList.add("invalid");
+          valid = false;
+        } else {
+          document
+            .getElementById("signupEmailError")
+            .classList.remove("visible");
+          document.getElementById("signupEmail").classList.remove("invalid");
+        }
+
+        // Phone
+        if (!validate.phone(phone)) {
+          document.getElementById("signupPhoneError").classList.add("visible");
+          document.getElementById("signupPhone").classList.add("invalid");
+          valid = false;
+        } else {
+          document
+            .getElementById("signupPhoneError")
+            .classList.remove("visible");
+          document.getElementById("signupPhone").classList.remove("invalid");
+        }
+
+        // ID
+        if (!validate.saId(id)) {
+          document.getElementById("signupIdError").classList.add("visible");
+          document.getElementById("signupId").classList.add("invalid");
+          valid = false;
+        } else {
+          document.getElementById("signupIdError").classList.remove("visible");
+          document.getElementById("signupId").classList.remove("invalid");
+        }
+
+        // Password
+        const strength = validate.passwordStrength(password);
+        if (strength.score < 3) {
+          toast.show(
+            "Password is too weak. Use 8+ chars with mix of cases, numbers & symbols.",
+            "error",
+          );
+          valid = false;
+        }
+
+        // Confirm
+        if (password !== confirm) {
+          document
+            .getElementById("signupConfirmError")
+            .classList.add("visible");
+          document.getElementById("signupConfirm").classList.add("invalid");
+          valid = false;
+        } else {
+          document
+            .getElementById("signupConfirmError")
+            .classList.remove("visible");
+          document.getElementById("signupConfirm").classList.remove("invalid");
+        }
+
+        if (!valid) return;
+
+        const profile = data.getProfile();
+        profile.name = `${name} ${surname}`;
+        profile.email = email;
+        profile.phone = phone;
+        profile.idNumber = id;
+        data.setProfile(profile);
+
+        auth.login({ name: profile.name, email, id: "user-" + Date.now() });
+        toast.show("Account created! Welcome to CvBot.", "success");
+        router.go("dashboard");
+      }
+
+      function handleForgot(e) {
+        e.preventDefault();
+        const input = document.getElementById("forgotInput").value.trim();
+        if (!input) {
+          toast.show("Please enter your email or ID", "error");
+          return;
+        }
+        toast.show("Verification code sent to your email", "success");
+        router.go("forgot", { step: 2, target: input });
+        // Attach OTP auto-advance after render
+        setTimeout(() => {
+          document.querySelectorAll(".otp-input").forEach((inp, idx, arr) => {
+            inp.addEventListener("input", () => {
+              if (inp.value && idx < arr.length - 1) arr[idx + 1].focus();
+              inp.classList.toggle("filled", !!inp.value);
+            });
+            inp.addEventListener("keydown", (e) => {
+              if (e.key === "Backspace" && !inp.value && idx > 0)
+                arr[idx - 1].focus();
+            });
+            inp.addEventListener("paste", (e) => {
+              e.preventDefault();
+              const text = e.clipboardData.getData("text").replace(/\D/g, "");
+              arr.forEach((f, i) => {
+                if (text[i]) {
+                  f.value = text[i];
+                  f.classList.add("filled");
+                }
+              });
+              if (text.length >= 4) arr[3].focus();
+            });
+          });
+          document.querySelector(".otp-input")?.focus();
+          startResendTimer();
+        }, 50);
+      }
+
+      function verifyOTP(target) {
+        const inputs = [...document.querySelectorAll(".otp-input")];
+        const code = inputs.map((i) => i.value).join("");
+        if (code.length !== 4) {
+          document.getElementById("otpError").classList.add("visible");
+          toast.show("Please enter the full 4-digit code", "error");
+          return;
+        }
+        // For demo, accept any code
+        toast.show("Code verified!", "success");
+        router.go("forgot", { step: 3 });
+      }
+
+      let resendInterval;
+      function startResendTimer() {
+        let seconds = 30;
+        const btn = document.getElementById("resendBtn");
+        const timer = document.getElementById("resendTimer");
+        if (!btn || !timer) return;
+        btn.disabled = true;
+        clearInterval(resendInterval);
+        resendInterval = setInterval(() => {
+          seconds--;
+          timer.textContent = ` (${seconds}s)`;
+          if (seconds <= 0) {
+            clearInterval(resendInterval);
+            btn.disabled = false;
+            timer.textContent = "";
+          }
+        }, 1000);
+      }
+
+      function resendOTP() {
+        toast.show("New code sent!", "success");
+        startResendTimer();
+      }
+
+      function handleResetPassword(e) {
+        e.preventDefault();
+        const np = document.getElementById("newPassword").value;
+        const cp = document.getElementById("confirmNewPassword").value;
+        if (np.length < 8) {
+          toast.show("Password must be at least 8 characters", "error");
+          return;
+        }
+        if (np !== cp) {
+          toast.show("Passwords do not match", "error");
+          return;
+        }
+        toast.show("Password reset successfully! Please sign in.", "success");
+        router.go("login");
+      }
+
+      function togglePassword(inputId, btn) {
+        const input = document.getElementById(inputId);
+        if (input.type === "password") {
+          input.type = "text";
+          btn.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+        } else {
+          input.type = "password";
+          btn.innerHTML = '<i class="fa-regular fa-eye"></i>';
+        }
+      }
+
+      function toggleUserMenu(e) {
+        if (e) e.stopPropagation();
+        document.getElementById("userDropdown").classList.toggle("open");
+      }
+
+      function toggleMobileMenu() {
+        const nav = document.getElementById("mobileNav");
+        nav.style.display = nav.style.display === "none" ? "block" : "none";
+      }
+
+      function submitApplication() {
+        const jobId = parseInt(
+          document.getElementById("applyModal").dataset.jobId,
+        );
+        const name = document.getElementById("applyName").value.trim();
+        const email = document.getElementById("applyEmail").value.trim();
+
+        if (!name || !email) {
+          toast.show("Please fill in your name and email", "error");
+          return;
+        }
+        if (!validate.email(email)) {
+          toast.show("Please enter a valid email", "error");
+          return;
+        }
+
+        if (data.addApp({ jobId, name, email })) {
+          toast.show("Application submitted successfully! 🎉", "success");
+          modal.close("applyModal");
+          setTimeout(() => router.go("applications"), 800);
+        }
+      }
+
+      // Password strength meter
+      document.addEventListener("input", (e) => {
+        if (e.target.id === "signupPassword") {
+          const { score } = validate.passwordStrength(e.target.value);
+          const bars = document.querySelectorAll("#pwStrength .bar");
+          const text = document.getElementById("pwStrengthText");
+          bars.forEach((bar, i) => {
+            bar.classList.remove("active", "weak", "medium", "strong");
+            if (i < score) {
+              bar.classList.add("active");
+              bar.classList.add(
+                score <= 2 ? "weak" : score <= 3 ? "medium" : "strong",
+              );
+            }
+          });
+          if (text) {
+            text.textContent = !e.target.value
+              ? "Use 8+ characters with a mix of letters, numbers & symbols"
+              : score <= 2
+                ? "Weak password"
+                : score <= 3
+                  ? "Medium password"
+                  : score <= 4
+                    ? "Strong password"
+                    : "Very strong password";
+          }
+        }
+      });
+
+      // Click outside to close user menu
+      document.addEventListener("click", (e) => {
+        const menu = document.getElementById("userDropdown");
+        if (menu && !e.target.closest(".user-menu")) {
+          menu.classList.remove("open");
+        }
+      });
+
+      // ESC closes modals
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") modal.closeAll();
+      });
+
+      // Initialize
+      theme.init();
+      auth.init();
+      window.addEventListener("DOMContentLoaded", () => {
+        if (auth.user) {
+          router.go("dashboard");
+        } else {
+          router.go("login");
+        }
+      });
+    </script>
+  </body>
+</html>
